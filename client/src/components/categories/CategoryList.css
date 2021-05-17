@@ -1,0 +1,63 @@
+.category {
+    display: flex;
+    margin: 1%;
+    align-items: center;
+}
+
+.deleteButton, .editButton {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    transition: 500ms;
+}
+
+.deleteButton {
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+.editButton {
+    background-color: rgba(251, 255, 0, 0.4);
+}
+
+.deleteButton:hover, .confirmDeleteButton:hover {
+    background-color: rgba(255, 0, 0, 1);
+    transition: 500ms;
+}
+
+.editButton:hover {
+    background-color: rgba(251, 255, 0, 1);
+    transition: 500ms;
+}
+
+.closeModalButton {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    transition: 500ms;
+}
+
+.confirmDeleteButton {
+    margin-left: 10px;
+    width: fit-content;
+    padding: 0px 3px;
+    height: 25px;
+    background-color: rgba(255, 0, 0, 0.4);
+    border-radius: 3px;
+    transition: 500ms;
+}
+
+dialog {
+    z-index: 2;
+    position: fixed;
+    top: 50vh;
+    border-radius: 5px;
+}
+.categories{
+    border: 2px solid #B36A5E;
+    background-color:#EDEEC0;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 1%;
+}

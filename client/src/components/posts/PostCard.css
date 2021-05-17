@@ -1,0 +1,67 @@
+.post {
+    border: 2px solid #B36A5E;
+    background-color:#EDEEC0;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 1%;
+}
+.posts{
+   background-color: #C89F9C; 
+}
+.tags{
+    border: 2px solid #B36A5E;
+    background-color:#EDEEC0;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 1%;
+}
+.post Link{
+    
+}
+.post h4{
+    color:#B36A5E;
+    text-decoration: none;
+}
+.post h4:hover{
+    color:#C89F9C;
+}
+.postForm{
+    background-color: #EDEEC0;
+    padding: 1em;
+    border-radius: 5px;
+    border: 2px solid #B36A5E;
+}
+input{
+    background-color: #eee2df;
+}
+.posts option{
+    background-color: #eee2df;
+}
+
+select{
+    background-color: #eee2df;
+}
+button{
+    background-color: #eee2df;
+}
+.post_detail{
+    border: 2px solid #B36A5E;
+    background-color:#EDEEC0;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 1%;
+}
+.commentForm{
+    border: 2px solid #B36A5E;
+    background-color:#EDEEC0;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 1%;
+}
+.comment{
+    border: 2px solid #B36A5E;
+    background-color:#EDEEC0;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 1%;
+}
