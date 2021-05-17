@@ -1,5 +1,5 @@
 import json
-from rare_rest_api.models.rare_user import RareUser
+from rare_rest_api.models import RareUser
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
@@ -51,16 +51,16 @@ def register_user(request):
     # Create a new user by invoking the `create_user` helper method
     # on Django's built-in User model
     new_user = User.objects.create_user(
-        username=req_body['username'],
+        username=req_body['user_name'],
         email=req_body['email'],
         password=req_body['password'],
         first_name=req_body['first_name'],
-        last_name=req_body['last_name']
+        last_name=req_body['last_name'],
     )
 
     # Now save the extra info in the levelupapi_gamer table
     rare_user = RareUser.objects.create(
-        # bio=req_body['bio'],
+        bio=req_body['bio'],
         user=new_user
     )
 
@@ -71,5 +71,6 @@ def register_user(request):
     token = Token.objects.create(user=new_user)
 
     # Return the token to the client
-    data = json.dumps({"token": token.key})
+    data = json.dumps({"token": token.key,
+                       "valid": True})
     return HttpResponse(data, content_type='application/json')

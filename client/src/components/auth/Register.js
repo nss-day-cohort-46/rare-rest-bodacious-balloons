@@ -12,6 +12,7 @@ export const Register = (props) => {
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const history = useHistory()
+    const userName = useRef()
 
 
     const handleRegister = (e) => {
@@ -19,11 +20,12 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
-                "username": email.current.value,
+                "user_name": userName.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "email": email.current.value,
-                "password": password.current.value
+                "password": password.current.value,
+                "bio": bio.current.value,
             }
 
             return fetch("http://127.0.0.1:8000/register", {
@@ -65,6 +67,10 @@ export const Register = (props) => {
                     <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
                 </fieldset>
                 <fieldset>
+                    <label htmlFor="userName"> Username </label>
+                    <input ref={userName} type="text" name="userName" className="form-control" placeholder="username" required />
+                </fieldset>
+                <fieldset>
                     <label htmlFor="inputEmail"> Email address </label>
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
                 </fieldset>
@@ -75,6 +81,10 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="bio"> User Bio </label>
+                    <input ref={bio} type="text" name="bio" className="form-control" placeholder="tell us a bit about yourself!" required />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
