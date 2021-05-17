@@ -7,8 +7,10 @@
             "name": "rare-server",
             "database": "db.sqlite3"
         }
-    ],
+    ], 
+    "python.pythonPath": "/home/sllittrell/.local/share/virtualenvs/rare-rest-bodacious-balloons-G_7GWE8L/bin/python",
     "python.linting.pylintArgs": [
         "--django-settings-module=rare_rest.settings",
     ]
+   
 }
