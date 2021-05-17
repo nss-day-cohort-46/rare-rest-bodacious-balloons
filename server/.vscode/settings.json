@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "rare-rest-api",
+            "database": "${workspaceFolder:server}/db.sqlite3"
+        }
+    ]
+}
