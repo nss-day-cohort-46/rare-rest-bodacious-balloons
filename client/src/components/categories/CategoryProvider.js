@@ -6,7 +6,7 @@ export const CategoryProvider = props => {
     const [categories, setCategories] = useState([])
 
     const getCategories = () => {
-        return fetch(`http://localhost:8088/categories`)
+        return fetch(`http://localhost:8000/categories`)
             .then(res => res.json())
             .then(setCategories)
     }
