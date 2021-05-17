@@ -1,0 +1,50 @@
+[
+    {
+        "model": "rare_rest_api.category",
+        "pk": 1,
+        "fields": {
+            "label": "python"
+            
+        }
+    },
+    {
+        "model": "rare_rest_api.category",
+        "pk": 2,
+        "fields": {
+            "label": "react"
+            
+        }
+    },
+    {
+        "model": "rare_rest_api.category",
+        "pk": 3,
+        "fields": {
+            "label": "javascript"
+            
+        }
+    },
+    {
+        "model": "rare_rest_api.category",
+        "pk": 4,
+        "fields": {
+            "label": "news"
+            
+        }
+    },
+    {
+        "model": "rare_rest_api.category",
+        "pk": 5,
+        "fields": {
+            "label": "animals"
+            
+        }
+    },
+    {
+        "model": "rare_rest_api.category",
+        "pk": 6,
+        "fields": {
+            "label": "climate"
+            
+        }
+    }
+]
