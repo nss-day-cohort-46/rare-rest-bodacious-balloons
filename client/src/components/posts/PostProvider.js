@@ -7,20 +7,20 @@ export const PostProvider = props => {
     const [ searchTerms, setSearchTerms ] = useState("")
 
     const getPosts = () => {
-        return fetch(`http://localhost:8000/posts`), {
+        return fetch(`http://localhost:8000/posts`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
             }
-        }
+        })
             .then(res => res.json())
             .then(setPosts)
     }
     const getPostById = (id) => {
-        return fetch(`http://localhost:8000/posts/${id}`), {
+        return fetch(`http://localhost:8000/posts/${id}`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
             }
-        }
+        })
             .then(res => res.json())
             
     }
