@@ -117,7 +117,7 @@ export const PostList = props => {
                             onChange={handleControlledInputChange}>
                             <option value="0">All Users</option>
                             {users.map(l => (
-                                <option key={l.id} value={l.id}>
+                                <option key={"user" + l.id} value={l.id}>
                                     {l.firstName} {l.lastName}
                                 </option>
                             ))}
@@ -136,7 +136,7 @@ export const PostList = props => {
                         onChange={handleControlledInputChange}>
                         <option value="0">All Categories</option>
                         {categories.map(l => (
-                            <option key={l.id} value={l.id}>
+                            <option key={"category" + l.id} value={l.id}>
                                 {l.label}
                             </option>
                         ))}
