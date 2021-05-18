@@ -1,10 +1,12 @@
 {
+    "python.pythonPath": "/Users/samanthacampbell/.local/share/virtualenvs/server-3y8BVEuv/bin/python",
+    "python.linting.enabled": false,
     "sqltools.connections": [
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "rare-rest-api",
-            "database": "${workspaceFolder:server}/db.sqlite3"
+            "name": "rare",
+            "database": "db.sqlite3"
         }
     ]
 }
