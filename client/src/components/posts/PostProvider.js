@@ -7,7 +7,7 @@ export const PostProvider = props => {
     const [ searchTerms, setSearchTerms ] = useState("")
 
     const getPosts = () => {
-        return fetch(`http://localhost:8000/posts`, {
+        return fetch(`http://localhost:8000/posts`,{
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
             }
