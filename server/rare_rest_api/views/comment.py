@@ -10,12 +10,20 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from django.db.models import Count, Q
 
-class RareUserSerializer(serializers.Serializer):
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'username')
 
-class CommentSerializer(serializers.Serializer):
+class RareUserSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False)
+    class Meta:
+        model = RareUser
+        fields = ('user',)
+
+class CommentSerializer(serializers.ModelSerializer):
 
     author = RareUserSerializer(many=False)
     class Meta:
@@ -29,7 +37,8 @@ class CommentViewSet(ViewSet):
     def create(self, request):
 
         # Identify the user
-        rareuser = RareUser.objects.get(user=request.auth.user)
+        user = User.objects.get(pk=request.auth.user.id)
+        rareuser = RareUser.objects.get(pk=user.pk)
 
         # Identify the post
         post = Post.objects.get(pk=request.data['postId'])
