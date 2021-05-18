@@ -24,6 +24,7 @@ from rest_framework import routers
 from rare_rest_api.views import CategoryView
 from rare_rest_api.views import PostViewSet
 from rare_rest_api.views import RareUserView
+from rare_rest_api.views import SubscriptionView
 
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -31,7 +32,7 @@ router.register(r'posts', PostViewSet , 'post')
 router.register(r'categories', CategoryView, 'category')
 router.register(r'comments', CommentViewSet, 'comment')
 router.register(r'users', RareUserView, 'user')
-
+router.register(r'subscriptions', SubscriptionView, 'subscription')
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
