@@ -21,6 +21,12 @@ class CategoryView(ViewSet):
         except ValidationError as ex:
             return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, pk=None):
+        category = Category.objects.get(pk=pk)
+        category.label = request.data['label']
+        category.save()
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
     def list(self, request):
         """Handle GET requests to get all game types
 

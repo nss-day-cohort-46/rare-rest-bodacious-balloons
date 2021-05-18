@@ -6,7 +6,7 @@ export const SubscriptionProvider = props => {
     const [subscriptions, setSubscriptions] = useState([])
 
     const getSubscriptions = () => {
-        return fetch(`http://localhost:8088/subscriptions`,{
+        return fetch(`http://localhost:8000/subscriptions`,{
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
             }
@@ -16,7 +16,7 @@ export const SubscriptionProvider = props => {
     }
 
     const addSubscription = subscription => {
-        return fetch(`http://localhost:8088/subscriptions`, {
+        return fetch(`http://localhost:8000/subscriptions`, {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
@@ -28,8 +28,11 @@ export const SubscriptionProvider = props => {
     }
 
     const deleteSubscription = id => {
-        return fetch(`http://localhost:8088/subscriptions/${id}`, {
-            method: "DELETE"
+        return fetch(`http://localhost:8000/subscriptions/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
+            }
         })
             .then(getSubscriptions)
     }
