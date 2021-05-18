@@ -7,13 +7,13 @@ export const ReactionProvider = props => {
     const [postReact, setPostReact] = useState([])
 
     const getReactions = () => {
-        return fetch(`http://localhost:8088/reactions`)
+        return fetch(`http://localhost:8000/reactions`)
             .then(res => res.json())
             .then(setReactions)
     }
 
     const addReaction = tagObj => {
-        return fetch("http://localhost:8088/reactions", {
+        return fetch("http://localhost:8000/reactions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -25,13 +25,13 @@ export const ReactionProvider = props => {
 
 
     const getPostReactions = () => {
-        return fetch(`http://localhost:8088/postReactions`)
+        return fetch(`http://localhost:8000/postReactions`)
             .then(res => res.json())
             .then(setPostReact)
     }
     
     const addPostReaction = (reactObj) => {
-        return fetch(`http://localhost:8088/postReaction`, {
+        return fetch(`http://localhost:8000/postReaction`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -43,7 +43,7 @@ export const ReactionProvider = props => {
     }
 
     // const getReactionsByReactionId = (reactionId) =>{
-    //     return fetch(`http://localhost:8088/postReaction?reaction=${rectionId}`)
+    //     return fetch(`http://localhost:8000/postReaction?reaction=${rectionId}`)
     //     .then(res => res.json())
     //     .then(setPostComments)
     // }

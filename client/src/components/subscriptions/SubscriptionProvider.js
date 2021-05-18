@@ -6,13 +6,13 @@ export const SubscriptionProvider = props => {
     const [subscriptions, setSubscriptions] = useState([])
 
     const getSubscriptions = () => {
-        return fetch(`http://localhost:8088/subscriptions`)
+        return fetch(`http://localhost:8000/subscriptions`)
             .then(res => res.json())
             .then(setSubscriptions)
     }
 
     const addSubscription = subscription => {
-        return fetch(`http://localhost:8088/subscriptions`, {
+        return fetch(`http://localhost:8000/subscriptions`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -23,7 +23,7 @@ export const SubscriptionProvider = props => {
     }
 
     const deleteSubscription = id => {
-        return fetch(`http://localhost:8088/subscriptions/${id}`, {
+        return fetch(`http://localhost:8000/subscriptions/${id}`, {
             method: "DELETE"
         })
             .then(getSubscriptions)
