@@ -5,7 +5,7 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "rare-rest",
+            "name": "rare",
             "database": "db.sqlite3"
         }
     ]
