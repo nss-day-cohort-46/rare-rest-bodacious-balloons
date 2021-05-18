@@ -55,5 +55,11 @@ class CommentViewSet(ViewSet):
             return Response(serializer.data)
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
-         
+
+        
+    ################################  UPDATE  ################################
+    ################################  LIST  ################################
+    ################################  RETRIEVE  ################################
+    ################################  DESTROY  ################################
+    ################################  UPDATE  ################################
 
