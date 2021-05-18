@@ -6,7 +6,11 @@ export const SubscriptionProvider = props => {
     const [subscriptions, setSubscriptions] = useState([])
 
     const getSubscriptions = () => {
-        return fetch(`http://localhost:8088/subscriptions`)
+        return fetch(`http://localhost:8088/subscriptions`,{
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
+            }
+        })
             .then(res => res.json())
             .then(setSubscriptions)
     }
@@ -15,6 +19,7 @@ export const SubscriptionProvider = props => {
         return fetch(`http://localhost:8088/subscriptions`, {
             method: "POST",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(subscription)
