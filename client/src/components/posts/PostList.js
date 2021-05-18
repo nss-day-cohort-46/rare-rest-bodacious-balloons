@@ -15,8 +15,7 @@ export const PostList = props => {
     const [subscribedPosts, setSubscribedPosts] = useState([])
     const [categoryIdValue, setCategoryIdValue] = useState(0)
     const [userIdValue, setUserIdValue] = useState(0)
-    // const userId = parseInt(localStorage.getItem(`rare_user_token`))
-    const userId = 1
+    const userId = parseInt(localStorage.getItem(`rare_user_id`))
     const history = useHistory()
     const [filteredPosts, setFiltered] = useState([])
 
@@ -48,7 +47,7 @@ export const PostList = props => {
 
         // check and see if this is "my posts" or just all posts
         if (history.location.pathname.includes("/my")) {
-            const thisUsersPosts = sortedPosts.filter(post => post.userId === userId)
+            const thisUsersPosts = sortedPosts.filter(post => parseInt(post.user.id) === userId)
             setUserPosts(thisUsersPosts)
         } else {
             setUserPosts(sortedPosts)
