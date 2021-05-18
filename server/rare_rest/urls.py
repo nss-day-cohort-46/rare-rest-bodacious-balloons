@@ -27,6 +27,7 @@ from rare_rest_api.views import RareUserView
 from rare_rest_api.views import SubscriptionView
 from rare_rest_api.views.comment import CommentViewSet
 
+
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostViewSet , 'post')
 router.register(r'categories', CategoryView, 'category')

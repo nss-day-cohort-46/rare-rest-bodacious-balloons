@@ -9,13 +9,13 @@ export const CommentProvider = (props) => {
     const [postComments, setPostComments] = useState([])
 
     const getComments = () => {
-        return fetch("http://localhost:8088/comments")
+        return fetch("http://localhost:8000/comments")
         .then(res => res.json())
         .then(setComments)
     }
 
     const addComment = commentObj => {
-        return fetch("http://localhost:8088/comments", {
+        return fetch("http://localhost:8000/comments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -26,25 +26,25 @@ export const CommentProvider = (props) => {
     }
 
     const getCommentsByPostId = (postId) =>{
-        return fetch(`http://localhost:8088/comments?postId=${postId}`)
+        return fetch(`http://localhost:8000/comments?postId=${postId}`)
         .then(res => res.json())
         .then(setPostComments)
     }
     
     const getCommentById = (id) => {
-        return fetch(`http://localhost:8088/comments/${id}`)
+        return fetch(`http://localhost:8000/comments/${id}`)
             .then(res => res.json())
     }
 
     const deleteComment = (commentId, postId) => {
-        return fetch(`http://localhost:8088/comments/${commentId}`, {
+        return fetch(`http://localhost:8000/comments/${commentId}`, {
             method: "DELETE"
         })
           .then(() => getCommentsByPostId(postId))  
     }
 
     const updateComment = comment => {
-        return fetch(`http://localhost:8088/comments/${comment.id}`, {
+        return fetch(`http://localhost:8000/comments/${comment.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"
