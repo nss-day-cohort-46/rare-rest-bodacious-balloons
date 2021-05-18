@@ -18,8 +18,8 @@ export const UserProvider = props => {
                     lastName: users.last_name,
                     userName: users.username
                 }
-            })}.then(setUsers(res)))
-            
+            })})
+            .then(setUsers())
     }
 
     const getUserById = (id) => {
