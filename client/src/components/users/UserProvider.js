@@ -12,7 +12,14 @@ export const UserProvider = props => {
             }
         })
             .then(res => res.json())
-            .then(setUsers)
+            .then(res => { res.map(users => {
+                return {
+                    firstName: users.first_name,
+                    lastName: users.last_name,
+                    userName: users.username
+                }
+            })}.then(setUsers(res)))
+            
     }
 
     const getUserById = (id) => {

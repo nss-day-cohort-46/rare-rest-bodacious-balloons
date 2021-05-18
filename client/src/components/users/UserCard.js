@@ -8,7 +8,7 @@ export const UserCard = ({ user, subscription, isSelf }) => {
     const { addSubscription, deleteSubscription } = useContext(SubscriptionContext)
     const [cardSubscription, setCardSubscription] = useState({})
     const [isLoading, setIsLoading] = useState(false)
-    const userId = parseInt(localStorage.getItem(`rare_user_id`))
+    const userId = parseInt(localStorage.getItem(`userId`))
 
     const handleSubscribe = e => {
         setIsLoading(true)
