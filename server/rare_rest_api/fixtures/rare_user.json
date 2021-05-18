@@ -1,0 +1,13 @@
+[
+    {
+        "model": "rare_rest_api.rareuser",
+        "pk": 1,
+        "fields": {
+            "user" : 1,
+            "bio": "I like vegetables",
+            "created_on":"2020-08-28T14:51:39.989Z",
+            "profile_image_url": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.edgeofexistence.org%2Fwp-content%2Fuploads%2F2017%2F06%2FTapirus-indicus_shutterstock_411690637-1000x667.jpg&imgrefurl=http%3A%2F%2Fwww.edgeofexistence.org%2Fspecies%2Fmalayan-tapir%2F&tbnid=B1M5jb9eMYWxBM&vet=12ahUKEwjPju_Tu9PwAhXHOlMKHV-IDhwQMygFegUIARDbAQ..i&docid=G3amY7guO6Y_nM&w=1000&h=667&q=tapir&ved=2ahUKEwjPju_Tu9PwAhXHOlMKHV-IDhwQMygFegUIARDbAQ",
+            "active": false
+        }
+    }
+]

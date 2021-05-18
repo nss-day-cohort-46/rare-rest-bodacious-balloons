@@ -33,4 +33,17 @@ class Migration(migrations.Migration):
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
+        migrations.CreateModel(
+            name='Post',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=50)),
+                ('publication_date', models.DateTimeField()),
+                ('image_url', models.ImageField(upload_to=None)),
+                ('content', models.TextField()),
+                ('approved', models.BooleanField()),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='rare_rest_api.category')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='rare_rest_api.rareuser')),
+            ],
+        ),
     ]
