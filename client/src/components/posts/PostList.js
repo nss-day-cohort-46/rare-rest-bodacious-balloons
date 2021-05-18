@@ -15,7 +15,8 @@ export const PostList = props => {
     const [subscribedPosts, setSubscribedPosts] = useState([])
     const [categoryIdValue, setCategoryIdValue] = useState(0)
     const [userIdValue, setUserIdValue] = useState(0)
-    const userId = parseInt(localStorage.getItem(`rare_user_id`))
+    // const userId = parseInt(localStorage.getItem(`rare_user_token`))
+    const userId = 1
     const history = useHistory()
     const [filteredPosts, setFiltered] = useState([])
 
