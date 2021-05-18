@@ -1,4 +1,4 @@
-from server.rare_rest_api.models import category
+from rare_rest_api.models import category
 from django.core.exceptions import ValidationError
 from rest_framework import status
 from django.http import HttpResponseServerError

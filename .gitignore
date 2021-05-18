@@ -162,3 +162,4 @@ yarn-debug.log*
 yarn-error.log*
 db.sqlite3
 sandbox.sql
+/migrations
