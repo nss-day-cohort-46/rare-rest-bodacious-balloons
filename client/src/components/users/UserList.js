@@ -7,7 +7,7 @@ export const UserList = () => {
     const { users, getAllUsers } = useContext(UserContext)
     const { subscriptions, getSubscriptions } = useContext(SubscriptionContext)
     const [sortedUsers, setSortedUsers] = useState([])
-    const userId = parseInt(localStorage.getItem(`rare_user_id`))
+    const userId = parseInt(localStorage.getItem(`userId`))
 
     useEffect(() => {
         getSubscriptions()
