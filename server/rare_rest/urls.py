@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from rare_rest_api.views.comment import CommentViewSet
+
 from rare_rest_api.views import register_user, login_user
 from django.contrib import admin
 from django.conf.urls import include
@@ -25,7 +25,7 @@ from rare_rest_api.views import CategoryView
 from rare_rest_api.views import PostViewSet
 from rare_rest_api.views import RareUserView
 from rare_rest_api.views import SubscriptionView
-
+from rare_rest_api.views.comment import CommentViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostViewSet , 'post')
