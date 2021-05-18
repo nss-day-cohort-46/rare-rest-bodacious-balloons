@@ -19,6 +19,7 @@ export const CategoryProvider = props => {
         return fetch(`http://localhost:8000/categories`, {
             method: "POST",
             headers: {
+                "Authorization": `Token ${localStorage.getItem('rare_user_token')}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(newCategory)
