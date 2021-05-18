@@ -3,8 +3,13 @@
         "model": "rare_rest_api.post",
         "pk": 1,
         "fields": {
-            "user": 1,
-            "bio": "Me"
+            "user" : 1,
+            "category": 2,
+            "title": "React",
+            "publication_date":"2020-05-28T14:51:39.989Z",
+            "image_url": "https://miro.medium.com/max/2400/1*WA_9JsyqFkge2HwYKcdJQw.png",
+            "content": "This is a bodacious post",
+            "approved": true
         }
     }
 ]
