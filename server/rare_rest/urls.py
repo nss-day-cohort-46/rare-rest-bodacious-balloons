@@ -23,12 +23,14 @@ from django.urls import path
 from rest_framework import routers
 from rare_rest_api.views import CategoryView
 from rare_rest_api.views import PostViewSet
+from rare_rest_api.views import RareUserView
 
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostViewSet , 'post')
 router.register(r'categories', CategoryView, 'category')
 router.register(r'comments', CommentViewSet, 'comment')
+router.register(r'users', RareUserView, 'user')
 
 urlpatterns = [
     path('', include(router.urls)),
