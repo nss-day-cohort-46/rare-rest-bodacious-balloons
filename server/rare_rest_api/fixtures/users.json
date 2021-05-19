@@ -16,5 +16,23 @@
             "groups": [],
             "user_permissions": []
         }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$LVIjA58Ruk1gj9jhFD663S$DmepTX9IXb+FLJQzJIQ+dTdtBsJr1UsTrtEdf3Mmnzk=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "amart",
+            "first_name": "Alex",
+            "last_name": "Martin",
+            "email": "raymond.alex.martin@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-08-28T14:51:39.989Z",
+            "groups": [],
+            "user_permissions": []
+        }
     }
 ]

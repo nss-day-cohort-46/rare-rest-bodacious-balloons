@@ -7,9 +7,15 @@ export const CommentProvider = (props) => {
     const { postId, commentId } = useParams()
     const [comments, setComments] = useState([])
     const [postComments, setPostComments] = useState([])
+    const headers = {
+        "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
+        "Content-Type": "application/json"
+    }
 
     const getComments = () => {
-        return fetch("http://localhost:8000/comments")
+        return fetch("http://localhost:8000/comments", {
+            headers: headers
+        })
         .then(res => res.json())
         .then(setComments)
     }
@@ -17,28 +23,31 @@ export const CommentProvider = (props) => {
     const addComment = commentObj => {
         return fetch("http://localhost:8000/comments", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: headers,
             body: JSON.stringify(commentObj)
         })
         .then(getComments)
     }
 
     const getCommentsByPostId = (postId) =>{
-        return fetch(`http://localhost:8000/comments?postId=${postId}`)
+        return fetch(`http://localhost:8000/comments?postId=${postId}`, {
+            headers: headers
+        })
         .then(res => res.json())
         .then(setPostComments)
     }
     
     const getCommentById = (id) => {
-        return fetch(`http://localhost:8000/comments/${id}`)
+        return fetch(`http://localhost:8000/comments/${id}`, {
+            headers: headers
+        })
             .then(res => res.json())
     }
 
     const deleteComment = (commentId, postId) => {
         return fetch(`http://localhost:8000/comments/${commentId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: headers
         })
           .then(() => getCommentsByPostId(postId))  
     }
@@ -46,9 +55,7 @@ export const CommentProvider = (props) => {
     const updateComment = comment => {
         return fetch(`http://localhost:8000/comments/${comment.id}`, {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: headers,
           body: JSON.stringify(comment)
         })
           .then(getComments)
