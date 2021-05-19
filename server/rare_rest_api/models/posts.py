@@ -8,3 +8,4 @@ class Post(models.Model):
     image_url = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
     content = models.TextField()
     approved = models.BooleanField()
+    tags = models.ManyToManyField("Tag", related_name="posts")
