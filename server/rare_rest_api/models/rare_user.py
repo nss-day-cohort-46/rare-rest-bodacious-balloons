@@ -9,3 +9,4 @@ class RareUser(models.Model):
     profile_image_url = models.CharField(max_length=250, default="")
     created_on = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
+    
