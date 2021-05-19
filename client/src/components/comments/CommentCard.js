@@ -20,7 +20,7 @@ export const CommentCard = ({ comment }) => {
 
             {currentUser === comment.authorId ?  <button className="editButton" onClick={() => {
                 history.push(`/posts/detail/editcomment/${comment.id}`)
-            }}>Edit</button> : <div></div>}
+            }}>E</button> : <div></div>}
             
             
             {currentUser === comment.authorId ?  <button className="deleteButton" onClick={handleDelete}

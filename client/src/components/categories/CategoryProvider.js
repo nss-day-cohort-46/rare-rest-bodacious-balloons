@@ -27,7 +27,7 @@ export const CategoryProvider = props => {
     }
 
     const editCategory = (newCategory) => {
-        return fetch(`http://localhost:8088/categories/${newCategory.id}`, {
+        return fetch(`http://localhost:8000/categories/${newCategory.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -38,7 +38,7 @@ export const CategoryProvider = props => {
     }
 
     const deleteCategory = id => {
-        return fetch(`http://localhost:8088/categories/${id}`, {
+        return fetch(`http://localhost:8000/categories/${id}`, {
             method: "DELETE"
         })
             .then(getCategories)
