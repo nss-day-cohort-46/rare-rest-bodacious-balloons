@@ -54,7 +54,7 @@ export const CommentForm = () => {
                 content: comment.content
             })
                 // .then(()=> getCommentsByPostId(pId))
-                .then(() => history.push(`/posts/detail/${comment.postId}`))
+                .then(() => history.push(`/posts/detail/${comment.post.id}`))
         } else {
             addComment({
                 postId: parseInt(postId),

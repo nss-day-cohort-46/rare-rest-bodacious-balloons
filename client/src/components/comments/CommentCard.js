@@ -16,14 +16,14 @@ export const CommentCard = ({ comment }) => {
     return(
         <section className="comment">
             <p>{comment.content}</p>
-            <p>-  {comment.username}</p>
+            <p>-  {comment.author.user.username}</p>
 
-            {currentUser === comment.authorId ?  <button className="editButton" onClick={() => {
+            {currentUser === comment.author.user.id ?  <button className="editButton" onClick={() => {
                 history.push(`/posts/detail/editcomment/${comment.id}`)
             }}>E</button> : <div></div>}
             
             
-            {currentUser === comment.authorId ?  <button className="deleteButton" onClick={handleDelete}
+            {currentUser === comment.author.user.id ?  <button className="deleteButton" onClick={handleDelete}
                 >X</button> : <div></div>}
             
         </section>
