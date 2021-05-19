@@ -12,8 +12,8 @@ export const PostCard = ({ post, category, user }) => {
             <h4>{post.title}</h4>
             </Link>
             <p>Post Date: {post.publication_date}</p>
-            <p>User: {user.user.last_name}, {user.user.first_name}</p>
-            <p>Category: {category.label}</p>
+            <p>User: {user?.user.last_name}, {user?.user.first_name}</p>
+            <p>Category: {category?.label}</p>
             {/* <button onClick={() => history.push(`/posts/${post.id}`)}>Post Details</button> */}
         </article>
     )

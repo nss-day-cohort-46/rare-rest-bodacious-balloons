@@ -26,7 +26,6 @@ export const PostProvider = props => {
     }
 
     const addPost = postObj => {
-        // debugger
         return fetch("http://localhost:8000/posts", {
             method: "POST",
             headers: {
