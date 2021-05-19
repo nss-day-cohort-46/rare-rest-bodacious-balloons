@@ -28,7 +28,8 @@ class CommentSerializer(serializers.ModelSerializer):
     author = RareUserSerializer(many=False)
     class Meta:
         model = Comment
-        fields = ('post', 'author', 'content', 'created_on')
+        fields = ('id', 'post', 'author', 'content', 'created_on')
+        depth = 1
 
 class CommentViewSet(ViewSet):
 
@@ -71,7 +72,12 @@ class CommentViewSet(ViewSet):
     ################################  LIST  ################################
 
     def list(self, request):
-        comments = Comment.objects.all()
+
+        post_id = self.request.query_params.get('postId', None)
+        if post_id:
+            comments = Comment.objects.filter(post__id=post_id)
+        else:
+            comments = Comment.objects.all()
         serializer = CommentSerializer(comments, many=True, context={'request': request})
         return Response(serializer.data)
 

@@ -26,7 +26,6 @@ export const PostProvider = props => {
     }
 
     const addPost = postObj => {
-        // debugger
         return fetch("http://localhost:8000/posts", {
             method: "POST",
             headers: {
@@ -51,7 +50,6 @@ export const PostProvider = props => {
     }
 
     const deletePost = postId => {
-        debugger
         return fetch(`http://localhost:8000/posts/${postId}`, {
             method: "DELETE",
             headers: {

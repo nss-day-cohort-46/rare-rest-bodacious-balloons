@@ -47,7 +47,7 @@ export const PostList = props => {
 
         // check and see if this is "my posts" or just all posts
         if (history.location.pathname.includes("/my")) {
-            const thisUsersPosts = sortedPosts.filter(post => parseInt(post.user.id) === userId)
+            const thisUsersPosts = sortedPosts.filter(post => parseInt(post.user.user.id) === userId)
             setUserPosts(thisUsersPosts)
         } else {
             setUserPosts(sortedPosts)
@@ -61,7 +61,7 @@ export const PostList = props => {
         const userAuthors = userSubscriptions.map(sub => sub.author.id)
         userAuthors.push(userId)
         userPosts.forEach(post => {
-            if (userAuthors.includes(post.user.id)) userSubscribedPosts.push(post)
+            if (userAuthors.includes(post.user.user.id)) userSubscribedPosts.push(post)
         })
         setSubscribedPosts(userSubscribedPosts)
     }, [userPosts, subscriptions])
@@ -152,7 +152,7 @@ export const PostList = props => {
                     key={post.id}
                     post={post}
                     category={categories.find(cat => cat.id === post.category.id)}
-                    user={users.find(user => user.user.id === post.user.id)}
+                    user={users.find(user => user.user.id === post.user.user.id)}
                 />)
             }
 

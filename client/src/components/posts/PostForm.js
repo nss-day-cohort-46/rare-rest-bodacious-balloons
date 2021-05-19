@@ -15,8 +15,8 @@ export const PostForm = () => {
         content: "",
         imageUrl: "",
         categoryId: 0,
-        publicationDate: ""
-        // approved: ""
+        publicationDate: "",
+        approved: false
     })
 
     //create state var to stop quick clicks on edits
@@ -31,7 +31,7 @@ export const PostForm = () => {
 
         const newPost = { ...post }
 
-        if (post.available===true) {
+        if (post.approved===true) {
         newPost[event.target.id] = false
         }else{
         newPost[event.target.id] = true
@@ -82,11 +82,12 @@ export const PostForm = () => {
         // PUT - update
         updatePost({
             id: post.id,
-            user_id: post.userId,
+            user_id: post.user.id,
             title: post.title,
             content: post.content,
-            image_url: post.imageUrl,
-            category_id: post.categoryId
+            publication_date: post.publication_date,
+            image_url: post.image_url,
+            category_id: post.category.id
         })
         .then(() => history.push(`/posts/detail/${post.id}`))
         }else {
@@ -96,17 +97,17 @@ export const PostForm = () => {
         var month = dateObj.getUTCMonth() + 1; //months from 1-12
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
-        let newdate = year + "/" + month + "/" + day;
+        let newDate = dateObj.toISOString()
         
         // debugger
         addPost({
-            user_id: post.userId,
+            user_id: parseInt(post.userId),
             title: post.title,
             content: post.content,
             image_url: post.imageUrl,
-            category_id: post.categoryId,
-            publication_date: newdate
-            // approved: post.approved
+            category_id: parseInt(post.categoryId),
+            publication_date: newDate,
+            approved: post.approved
         })
         .then(setPost({  //reset state obj as blank to zero out add form
             title: "",
@@ -137,6 +138,7 @@ export const PostForm = () => {
         }
     },[postId])
 
+    console.log(post)
     return (
     <div>
     <form className="postForm ">
@@ -170,14 +172,14 @@ export const PostForm = () => {
             <input type="text" id="imageUrl" required className="form-control"
             placeholder="Image URL"
             onChange={handleControlledInputChange}
-            value={post.imageUrl}/>
+            value={post.image_url}/>
         </div>
         </fieldset>
 
         <fieldset>
             <div className="form-group">
-            <label htmlFor="categoryId">Category: </label>
-            <select value={post.categoryId} id="categoryId" className="form-control" 
+            <label htmlFor="category_id">Category: </label>
+            <select value={post.category?.id} id="categoryId" className="form-control" 
             onChange={handleControlledInputChange}>
                 <option value="0">Select a Category</option>
                 {categories.map(l => (
@@ -189,7 +191,7 @@ export const PostForm = () => {
             </div>
         </fieldset>
 
-        {/* <fieldset>
+        <fieldset>
         <div className="form-group">
         
         <label htmlFor="approved">Approved:&nbsp;</label>
@@ -202,7 +204,7 @@ export const PostForm = () => {
         />
         
         </div>
-        </fieldset> */}
+        </fieldset>
 
         <button className=""
         type="submit"

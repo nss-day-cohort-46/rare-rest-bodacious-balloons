@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from rare_rest_api.models import Post, Category, RareUser
+from django.contrib.auth.models import User
 
 
 class PostViewSet(ViewSet):
@@ -15,7 +16,7 @@ class PostViewSet(ViewSet):
     def create(self, request):
         """Handle POST operations
         Returns:
-            Response -- JSON serialized game instance
+            Response -- JSON serialized post instance
         """
 
         # Uses the token passed in the `Authorization` header
@@ -23,12 +24,13 @@ class PostViewSet(ViewSet):
 
         post = Post()
         post.title = request.data['title']
-        post.publication_date = request.data['publicationDate']
-        post.image_url = request.data['imageUrl']
+        post.publication_date = request.data['publication_date']
+        post.image_url = request.data['image_url']
         post.content = request.data['content']
+        post.approved = request.data['approved']
         post.user = user
     
-        category = Category.objects.get(pk=request.data["categoryId"])
+        category = Category.objects.get(pk=request.data["category_id"])
         post.category = category
 
       
@@ -43,7 +45,7 @@ class PostViewSet(ViewSet):
 
 
     def retrieve(self, request, pk=None):
-        """Handle GET requests for single game
+        """Handle GET requests for single post
         Returns:
             Response -- JSON serialized game instance
         """
@@ -63,19 +65,19 @@ class PostViewSet(ViewSet):
         user = RareUser.objects.get(user=request.auth.user)
         post = Post.objects.get(pk=pk)
         post.title = request.data['title']
-        post.publication_date = request.data['publicationDate']
-        post.image_url = request.data['imageUrl']
+        post.publication_date = request.data['publication_date']
+        post.image_url = request.data['image_url']
         post.content = request.data['content']
         post.user = user
 
-        category = Category.objects.get(pk=request.data["categoryId"])
+        category = Category.objects.get(pk=request.data["category_id"])
         post.category = category
         post.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def destroy(self, request, pk=None):
-        """Handle DELETE requests for a single game
+        """Handle DELETE requests for a single post
         Returns:
             Response -- 200, 404, or 500 status code
         """
@@ -107,11 +109,25 @@ class PostViewSet(ViewSet):
             post, many=True, context={'request': request})
         return Response(serializer.data)
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name', 'username']
+
+class RareUserSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False)
+    class Meta:
+        model = RareUser
+        fields = ['user']
+
+
 class PostSerializer(serializers.ModelSerializer):
     """JSON serializer for games
     Arguments:
         serializer type
     """
+    user = RareUserSerializer(many=False)
     class Meta:
         model = Post
         fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'category', 'user', 'approved')
