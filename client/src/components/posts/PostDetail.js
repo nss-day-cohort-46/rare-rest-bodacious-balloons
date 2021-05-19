@@ -35,9 +35,9 @@ export const PostDetail = () => {
             <article className="post_detail">
                 <h1 className="title">{postDetail.title}</h1>
                 <Link to={`/posts/detail/edit/${postDetail.id}`}>EDIT</Link>
-                <h2 className="author">By: {postDetail.userId}</h2>
-                <h2 className="date">{postDetail.publicationDate}</h2>
-                <img src={postDetail.imageUrl} alt="article_image" width="25%" />
+                <h2 className="author">By: {postDetail.user?.user.first_name} {postDetail.user?.user.last_name}</h2>
+                <h2 className="date">{postDetail.publication_date}</h2>
+                <img src={postDetail.image_url} alt="article_image" width="25%" />
                 <section className="content">{postDetail.content}</section>
             </article>
 
