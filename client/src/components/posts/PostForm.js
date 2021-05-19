@@ -82,11 +82,12 @@ export const PostForm = () => {
         // PUT - update
         updatePost({
             id: post.id,
-            user_id: post.userId,
+            user_id: post.user.id,
             title: post.title,
             content: post.content,
-            image_url: post.imageUrl,
-            category_id: post.categoryId
+            publication_date: post.publication_date,
+            image_url: post.image_url,
+            category_id: post.category.id
         })
         .then(() => history.push(`/posts/detail/${post.id}`))
         }else {
@@ -137,6 +138,7 @@ export const PostForm = () => {
         }
     },[postId])
 
+    console.log(post)
     return (
     <div>
     <form className="postForm ">
@@ -170,14 +172,14 @@ export const PostForm = () => {
             <input type="text" id="imageUrl" required className="form-control"
             placeholder="Image URL"
             onChange={handleControlledInputChange}
-            value={post.imageUrl}/>
+            value={post.image_url}/>
         </div>
         </fieldset>
 
         <fieldset>
             <div className="form-group">
-            <label htmlFor="categoryId">Category: </label>
-            <select value={post.categoryId} id="categoryId" className="form-control" 
+            <label htmlFor="category_id">Category: </label>
+            <select value={post.category?.id} id="categoryId" className="form-control" 
             onChange={handleControlledInputChange}>
                 <option value="0">Select a Category</option>
                 {categories.map(l => (
