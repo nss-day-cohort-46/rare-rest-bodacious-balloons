@@ -15,8 +15,7 @@ export const PostList = props => {
     const [subscribedPosts, setSubscribedPosts] = useState([])
     const [categoryIdValue, setCategoryIdValue] = useState(0)
     const [userIdValue, setUserIdValue] = useState(0)
-    // const userId = parseInt(localStorage.getItem(`rare_user_token`))
-    const userId = 1
+    const userId = parseInt(localStorage.getItem(`rare_user_id`))
     const history = useHistory()
     const [filteredPosts, setFiltered] = useState([])
 
@@ -44,11 +43,11 @@ export const PostList = props => {
 
     useEffect(() => {
         // sort posts by date
-        const sortedPosts = posts.sort((a, b) => new Date(b.publicationDate) - new Date(a.publicationDate))
+        const sortedPosts = posts.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date))
 
         // check and see if this is "my posts" or just all posts
         if (history.location.pathname.includes("/my")) {
-            const thisUsersPosts = sortedPosts.filter(post => post.userId === userId)
+            const thisUsersPosts = sortedPosts.filter(post => parseInt(post.user.id) === userId)
             setUserPosts(thisUsersPosts)
         } else {
             setUserPosts(sortedPosts)
@@ -58,11 +57,11 @@ export const PostList = props => {
     // Filter posts to only show who the user has subscribed to
     useEffect(() => {
         const userSubscribedPosts = []
-        const userSubscriptions = subscriptions.filter(sub => sub.followerId === userId)
-        const userAuthors = userSubscriptions.map(sub => sub.authorId)
+        const userSubscriptions = subscriptions.filter(sub => sub.follower.id === userId)
+        const userAuthors = userSubscriptions.map(sub => sub.author.id)
         userAuthors.push(userId)
         userPosts.forEach(post => {
-            if (userAuthors.includes(post.userId)) userSubscribedPosts.push(post)
+            if (userAuthors.includes(post.user.id)) userSubscribedPosts.push(post)
         })
         setSubscribedPosts(userSubscribedPosts)
     }, [userPosts, subscriptions])
@@ -84,7 +83,7 @@ export const PostList = props => {
                 setUserPosts(sortedPostsCat)
             } else {
                 // console.log("Sorted");
-                const thisUsersPosts = sortedPostsCat.filter(post => post.userId === sortVar)
+                const thisUsersPosts = sortedPostsCat.filter(post => post.user.id === sortVar)
                 setUserPosts(thisUsersPosts)
             }
         }
@@ -100,7 +99,7 @@ export const PostList = props => {
                 setUserPosts(sortedPostsCat)
             } else {
                 // console.log("Sorted");
-                const thisUsersPosts = sortedPostsCat.filter(post => post.categoryId === sortVar)
+                const thisUsersPosts = sortedPostsCat.filter(post => post.category.id === sortVar)
                 setUserPosts(thisUsersPosts)
             }
         }
@@ -118,8 +117,8 @@ export const PostList = props => {
                             onChange={handleControlledInputChange}>
                             <option value="0">All Users</option>
                             {users.map(l => (
-                                <option key={l.id} value={l.id}>
-                                    {l.firstName} {l.lastName}
+                                <option key={"user " + l.user.id} value={l.user.id}>
+                                    {l.user.first_name} {l.user.last_name}
                                 </option>
                             ))}
                         </select>
@@ -137,7 +136,7 @@ export const PostList = props => {
                         onChange={handleControlledInputChange}>
                         <option value="0">All Categories</option>
                         {categories.map(l => (
-                            <option key={l.id} value={l.id}>
+                            <option key={"category" + l.id} value={l.id}>
                                 {l.label}
                             </option>
                         ))}
@@ -152,8 +151,8 @@ export const PostList = props => {
                 subscribedPosts.map(post => <PostCard
                     key={post.id}
                     post={post}
-                    category={categories.find(cat => cat.id === post.categoryId)}
-                    user={users.find(user => user.id === post.userId)}
+                    category={categories.find(cat => cat.id === post.category.id)}
+                    user={users.find(user => user.user.id === post.user.id)}
                 />)
             }
 
