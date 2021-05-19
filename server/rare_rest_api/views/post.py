@@ -65,8 +65,8 @@ class PostViewSet(ViewSet):
         user = RareUser.objects.get(user=request.auth.user)
         post = Post.objects.get(pk=pk)
         post.title = request.data['title']
-        post.publication_date = request.data['publicationDate']
-        post.image_url = request.data['imageUrl']
+        post.publication_date = request.data['publication_date']
+        post.image_url = request.data['image_url']
         post.content = request.data['content']
         post.user = user
 

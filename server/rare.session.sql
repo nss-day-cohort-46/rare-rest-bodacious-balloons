@@ -18,3 +18,4 @@ VALUES (
     'category_id:bigint',
     'user_id:bigint'
   );
+
