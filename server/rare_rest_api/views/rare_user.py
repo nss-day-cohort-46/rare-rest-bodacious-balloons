@@ -17,21 +17,16 @@ class RareUserView(ViewSet):
     @action(methods=['post', 'delete'], detail=True)
     def subscribe(self, request, pk=None):
         """Manage subscribing to authors"""
-        follower = RareUser.object.get(user=request.auth.user)
-        author = RareUser.object.get(user=request.data['authorId'])
+        follower = RareUser.objects.get(user=request.auth.user)
+        author = RareUser.objects.get(pk=pk)
+        print(pk)
         if request.method == "POST":
             
-            try:
-                subbed = Subscription.objects.get(follower=follower, author=author)
-                return Response({'message': 'You are already subscribed to this author.'},
-                                    status=status.HTTP_422_UNPROCESSABLE_ENTITY) 
-
-            except Subscription.DoesNotExist:
                 subbed = Subscription()
                 subbed.follower = follower
                 subbed.author = author
                 subbed.save()
-        
+                return Response({'subscribed': True}, status=status.HTTP_201_CREATED)
         elif request.method == "DELETE":
             try:
                subbed = Subscription.objects.get(follower=follower, author=author)
