@@ -7,7 +7,7 @@ export const UserList = () => {
     const { users, getAllUsers } = useContext(UserContext)
     const { subscriptions, getSubscriptions } = useContext(SubscriptionContext)
     const [sortedUsers, setSortedUsers] = useState([])
-    const userId = parseInt(localStorage.getItem(`userId`))
+    const userId = parseInt(localStorage.getItem(`rare_user_id`))
 
     useEffect(() => {
         getSubscriptions()
@@ -33,11 +33,11 @@ export const UserList = () => {
             {
                 sortedUsers.map(user => {
                     // make sure we can't subscribe to ourselves
-                    let isSelf = (user.id === userId)
+                    let isSelf = (user.user.id === userId)
 
                     // Find the subscription between the user and the author, if there is one
-                    const userSubs = subscriptions.filter(sub => sub.followerId === userId)
-                    let subscription = userSubs.find(sub => sub.authorId === user.id)
+                    const userSubs = subscriptions.filter(sub => sub.follower.id === userId)
+                    let subscription = userSubs.find(sub => sub.author.id === user.user.id)
 
                     return <UserCard key={user.user.id} user={user} subscription={subscription} isSelf={isSelf}/>
                 })
