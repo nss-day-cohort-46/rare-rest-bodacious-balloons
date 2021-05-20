@@ -1,0 +1,23 @@
+[
+    {
+        "model": "rare_rest_api.tag",
+        "pk": 1,
+        "fields": {
+            "label": "whales"
+        }
+    },
+    {
+        "model": "rare_rest_api.tag",
+        "pk": 2,
+        "fields": {
+            "label": "parades"
+        }
+    },
+    {
+        "model": "rare_rest_api.tag",
+        "pk": 3,
+        "fields": {
+            "label": "electricity"
+        }
+    }
+]

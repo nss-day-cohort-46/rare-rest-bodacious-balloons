@@ -7,8 +7,9 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from rest_framework.decorators import action
-from rare_rest_api.models import Post, Category, RareUser, Reaction
+from rare_rest_api.models import Post, Category, RareUser, Reaction, Tag
 from django.contrib.auth.models import User
+from rest_framework.decorators import action
 
 
 class PostViewSet(ViewSet):
@@ -124,6 +125,17 @@ class PostViewSet(ViewSet):
                 react.save()
 
 
+    @action(methods=['post'], detail=True)
+    def tags(self, request, pk=None):
+        if request.method == "POST":
+            post = Post.objects.get(pk=pk)
+            tags = Tag.objects.in_bulk(request.data['tags'])
+            post.tags.set(tags)
+            post.save()
+            return Response({}, status=status.HTTP_201_CREATED)
+
+
+        return Response(None, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -146,5 +158,5 @@ class PostSerializer(serializers.ModelSerializer):
     user = RareUserSerializer(many=False)
     class Meta:
         model = Post
-        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'category', 'user', 'approved')
+        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'category', 'user', 'approved', 'tags')
         depth = 1

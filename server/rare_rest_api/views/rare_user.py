@@ -3,6 +3,7 @@ from rare_rest_api.views.comment import UserSerializer, RareUserSerializer
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
 from rest_framework.decorators import action
+from django.http import HttpResponseServerError
 from rest_framework.response import Response
 from rest_framework import serializers
 
@@ -41,3 +42,16 @@ class RareUserView(ViewSet):
         # anything other than POST or DELETE, tell client that
         # the method is not supported
         return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single user
+        Returns:
+            Response -- JSON serialized game instance
+        """
+        try:
+          
+            user = RareUser.objects.get(pk=pk)
+            serializer = RareUserSerializer(user, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
