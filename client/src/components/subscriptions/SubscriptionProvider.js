@@ -15,21 +15,24 @@ export const SubscriptionProvider = props => {
             .then(setSubscriptions)
     }
 
-    const addSubscription = subscription => {
-        return fetch(`http://localhost:8000/subscriptions`, {
+    const addSubscription = id => {
+        return fetch(`http://localhost:8000/users/${id}/subscribe`, {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify(subscription)
+            }
+            
         })
             .then(res => res.json())
     }
 
     const deleteSubscription = id => {
-        return fetch(`http://localhost:8000/subscriptions/${id}`, {
-            method: "DELETE"
+        return fetch(`http://localhost:8000/users/${id}/subscribe`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
+            }
         })
             .then(getSubscriptions)
     }

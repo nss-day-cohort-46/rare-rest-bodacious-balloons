@@ -19,3 +19,4 @@ VALUES (
     'user_id:bigint'
   );
 
+DELETE FROM rare_rest_api_subscription
