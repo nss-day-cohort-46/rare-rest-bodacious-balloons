@@ -39,7 +39,7 @@ export const UserList = () => {
                     const userSubs = subscriptions.filter(sub => sub.followerId === userId)
                     let subscription = userSubs.find(sub => sub.authorId === user.id)
 
-                    return <UserCard key={user.id} user={user} subscription={subscription} isSelf={isSelf}/>
+                    return <UserCard key={user.user.id} user={user} subscription={subscription} isSelf={isSelf}/>
                 })
             }
         </section>

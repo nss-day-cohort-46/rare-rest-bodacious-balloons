@@ -20,26 +20,27 @@ export const UserDetail = () => {
     }, [])
 
     useEffect(() => {
-        const userSubs = subscriptions.filter(sub => currentUserId === sub.authorId).length
+        const userSubs = subscriptions.filter(sub => currentUserId === sub.author_id).length
         setCurrentSubCount(userSubs)
     }, [subscriptions])
 
+    console.log(selectedUser)
     return (
         <section className="userDetail">
-            <h1 className="userDetail--h1">{selectedUser.userName}</h1>
+            <h1 className="userDetail--h1">{selectedUser.user?.username}</h1>
             <div className="userDetail__details">
                 <img className="avatar" src={emptyAvatar}></img>
                 <div className="userDetail__details--right">
-                    <p>{selectedUser.firstName} {selectedUser.lastName}</p>
-                    <p>{selectedUser.email}</p>
-                    <p>joined on {selectedUser.createdOn}</p>
+                    <p>{selectedUser.user?.first_name} {selectedUser.user?.last_name}</p>
+                    <p>{selectedUser.user?.email}</p>
+                    <p>joined on {selectedUser.created_on}</p>
                     { isCurrentUser &&
                         <p>Total Subscribers: {currentSubCount}</p>
                     }
 
                 </div>
             </div>
-            <p className="userDetail--userType">{selectedUser.isStaff ? "admin" : "regular user"}</p>
+            <p className="userDetail--userType">{selectedUser.user?.is_staff ? "admin" : "regular user"}</p>
         </section>
     )
 }
