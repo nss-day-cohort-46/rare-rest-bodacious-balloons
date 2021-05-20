@@ -10,7 +10,7 @@ from rare_rest_api.models import Reaction
 class ReactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reaction
-        fields = ("label", "image_url")
+        fields = ("id", "label", "image_url")
 
 
 class ReactionView(ViewSet):

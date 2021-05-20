@@ -29,18 +29,18 @@ export const ReactionProvider = props => {
     }
 
 
-    const getPostReactions = (post) => {
-        return fetch(`http://localhost:8000/post/${post}/reaction`,{
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
-            }
-        })
-            .then(res => res.json())
-            .then(setPostReact)
-    }
+    // const getPostReactions = (post) => {
+    //     return fetch(`http://localhost:8000/posts/${post}/reaction`,{
+    //         headers: {
+    //             "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(setPostReact)
+    // }
     
     const addPostReaction = (reactObj, post) => {
-        return fetch(`http://localhost:8000/post/${post}/reaction`, {
+        return fetch(`http://localhost:8000/posts/${post}/reaction`, {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
@@ -48,7 +48,7 @@ export const ReactionProvider = props => {
             },
             body: JSON.stringify(reactObj)
         })
-        .then(getPostReactions)
+        // .then(getPostReactions)
                 
     }
 
@@ -61,7 +61,7 @@ export const ReactionProvider = props => {
 
     return (
         <ReactionContext.Provider value={{
-            reactions, getReactions, addReaction, getPostReactions, postReact, addPostReaction
+            reactions, getReactions, addReaction, postReact, addPostReaction
         }}>
             {props.children}
         </ReactionContext.Provider>

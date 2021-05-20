@@ -17,7 +17,7 @@ export const PostDetail = () => {
     const history = useHistory();
 
     useEffect(() => {
-        getPostReactions()
+        // getPostReactions()
         getReactions()
         getPostById(postId)
             .then((res) => {
