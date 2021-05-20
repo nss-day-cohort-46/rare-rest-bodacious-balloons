@@ -54,9 +54,9 @@ export const PostDetail = () => {
             </div>
 
             <div className="manage_tags">
-                {userId === postDetail.userId ?
+                {userId === postDetail.user?.user.id ?
                     <section>
-                        <div>Tags: {postDetail.postTags.map(tags => tags.tag.label).join(", ")}</div>
+                        <div>Tags: {postDetail.tags.map(tag => tag.label).join(", ")}</div>
                         <button className="post_tags" onClick={() => history.push(`/posts/detail/${postId}/tags`)}>Manage Tags</button></section>
                     : <></>}
             </div>
