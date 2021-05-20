@@ -9,13 +9,15 @@ export const UserDetail = () => {
     const { userId } = useParams()
     const { subscriptions, getSubscriptions } = useContext(SubscriptionContext)
     const [selectedUser, setSelectedUser] = useState({})
-    const { getUserById } = useContext(UserContext)
+    const { getUserById, getAllUsers, users, updateAdminStatus } = useContext(UserContext)
     const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
     const isCurrentUser = currentUserId === parseInt(userId)
     const [currentSubCount, setCurrentSubCount] = useState(0)
+    const [admin, setAdmin] = useState({})
 
     useEffect(() => {
         getSubscriptions()
+        getAllUsers()
         getUserById(userId).then(setSelectedUser)
     }, [])
 
@@ -24,8 +26,29 @@ export const UserDetail = () => {
         setCurrentSubCount(userSubs)
     }, [subscriptions])
 
+    // debugger
+    const currentUser= users.find(user => user.user.id === parseInt(currentUserId))
+
+    const handleAdmin = (event) => {
+        if(event.target.checked){
+            const admin = {
+                id: selectedUser.user.id,
+                is_staff: true
+            }
+            setAdmin(admin)
+        }
+        if(event.target.checked === false){
+            const admin = {
+                id: selectedUser.user.id,
+                is_staff: false
+            }
+            setAdmin(admin)
+            return event.target.checked ? event.target.unchecked : event.target.checked
+        }
+        
+    }
     
-    console.log(selectedUser?.admin)
+    // console.log(selectedUser.user?.id)
     return (
         <section className="userDetail">
             <h1 className="userDetail--h1">{selectedUser.user?.username}</h1>
@@ -41,6 +64,12 @@ export const UserDetail = () => {
 
                 </div>
             </div>
+            <div>{currentUser?.user.is_staff ? selectedUser.user?.is_staff ? <div></div>:
+            <div><label htmlFor="admin">Admin Approve: </label><input type="checkbox" id="admin" onChange={handleAdmin}/></div> : 
+            <div></div>}</div>
+            <div>{currentUser?.user.is_staff ? selectedUser.user?.is_staff ?<div><label htmlFor="admin">Admin: </label><input type="checkbox" id="admin" checked onChange={handleAdmin}/></div> :
+             <div></div>: 
+            <div></div>}</div>
             <p className="userDetail--userType">{selectedUser.user?.is_staff ? "admin" : "regular user"}</p>
         </section>
     )

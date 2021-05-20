@@ -6,6 +6,7 @@ from rest_framework.decorators import action
 from django.http import HttpResponseServerError
 from rest_framework.response import Response
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 
 class RareUserView(ViewSet):
@@ -61,11 +62,11 @@ class RareUserView(ViewSet):
         Returns:
             Response -- Empty body with 204 status code
         """
-        rareuser = RareUser.objects.get(pk=pk)
+        user = User.objects.get(pk=pk)
 
-        rareuser.admin=request.data['admin']
+        user.is_staff=request.data['is_staff']
 
-        rareuser.save()
+        user.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
@@ -75,4 +76,4 @@ class RareUserSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False)
     class Meta:
         model = RareUser
-        fields = ('user', 'created_on', 'admin')
+        fields = ('user', 'created_on')

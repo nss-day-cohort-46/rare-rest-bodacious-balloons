@@ -40,14 +40,13 @@ export const UserCard = ({ user, subscription, isSelf }) => {
         <article className="userCard">
             <h2 className="userNameLink" onClick={() => history.push(`/users/${user.user.id}`)}>{user.user.username}</h2>
             <h3>{user.user.first_name} {user.user.last_name}</h3>
-            <p>Everyone is an admin!</p>
             {/* ternary - if the user card belongs to the current user, return "this is you", if not, show buttons */}
             {/* ternary - if not subscrubed, show subscribe button, else show unsub button */}
             {isSelf ?
                 <p className="thisIsYou">it's you!</p>
                 :
                 Object.keys(cardSubscription).length ?
-                    <button onClick={handleUnsubscribe} disabled={isLoading} className="unsubscribeButton" id={"unsubscribeButton--" + user.user.id}>Unsubscibe</button>
+                    <button onClick={handleUnsubscribe} disabled={isLoading} className="unsubscribeButton" id={"unsubscribeButton--" + user.user.id}>Unsubscribe</button>
                     :
                     <button onClick={handleSubscribe} disabled={isLoading} className="subscribeButton" id={"subscribeButton--" + user.user.id}>Subscribe</button>
             }

@@ -9,11 +9,3 @@ class RareUser(models.Model):
     profile_image_url = models.CharField(max_length=250, default="")
     created_on = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
-
-    @property
-    def admin(self):
-        return self.__admin
-
-    @admin.setter
-    def admin(self, value):
-        self.__admin = value
