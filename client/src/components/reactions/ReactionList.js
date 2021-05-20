@@ -11,7 +11,7 @@ export const ReactionList =() => {
 
     useEffect(()=>{
         getReactions()
-        .then(()=> getPostReactions())
+        .then(()=> getPostReactions(postId))
     }, [])
 
     const [reaction, setReaction]= useState({
@@ -24,7 +24,7 @@ export const ReactionList =() => {
         const newReaction = {...reaction}
         newReaction[event.target.id] = parseInt(event.target.value)
         // setReaction(newReaction)
-        addPostReaction({reactionId: parseInt(event.target.value)})     
+        addPostReaction({reactionId: parseInt(event.target.value)}, parseInt(postId))     
       }
     
 

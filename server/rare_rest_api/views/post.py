@@ -111,18 +111,19 @@ class PostViewSet(ViewSet):
             post, many=True, context={'request': request})
         return Response(serializer.data)
 
-    @action(methods=['post', 'delete'], detail=True)
-        def reaction(self, request, pk=None):
-            """Manage post reactions"""
-            user = RareUser.objects.get(user=request.auth.user)
-            post = Post.objects.get(pk=pk)
-            reaction = Reaction.objects.get(pk=request.data['reactionId'])
-            if request.method == "POST":
-                react = Reaction()
-                react.user = user
-                react.post = post
-                react.reaction = reaction
-                react.save()
+    @action(methods=['post'], detail=True)
+    def reaction(self, request, pk=None):
+        """Manage post reactions"""
+        # user = RareUser.objects.get(user=request.auth.user)
+        post = Post.objects.get(pk=pk)
+        reaction = Reaction.objects.get(pk=request.data['reactionId'])
+        if request.method == "POST":
+           
+            post.reactions.add(reaction)
+            
+            return Response({}, status=status.HTTP_201_CREATED)
+
+        return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
     @action(methods=['post'], detail=True)

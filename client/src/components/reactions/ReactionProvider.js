@@ -29,8 +29,8 @@ export const ReactionProvider = props => {
     }
 
 
-    const getPostReactions = () => {
-        return fetch(`http://localhost:8000/postReactions`,{
+    const getPostReactions = (post) => {
+        return fetch(`http://localhost:8000/post/${post}/reaction`,{
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
             }
@@ -39,8 +39,8 @@ export const ReactionProvider = props => {
             .then(setPostReact)
     }
     
-    const addPostReaction = (reactObj) => {
-        return fetch(`http://localhost:8000/postReaction`, {
+    const addPostReaction = (reactObj, post) => {
+        return fetch(`http://localhost:8000/post/${post}/reaction`, {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
