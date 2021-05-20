@@ -13,17 +13,14 @@ export const UserCard = ({ user, subscription, isSelf }) => {
     const handleSubscribe = e => {
         setIsLoading(true)
         const authorId = parseInt(e.target.id.split("--")[1])
-        const subscription = {
-            followerId: userId,
-            authorId: authorId
-        }
-        addSubscription(subscription)
+        addSubscription(authorId)
             .then(setCardSubscription)
     }
 
     const handleUnsubscribe = e => {
         setIsLoading(true)
-        deleteSubscription(cardSubscription.id)
+        const authorId = parseInt(e.target.id.split("--")[1])
+        deleteSubscription(authorId)
             .then(() => {
                 setCardSubscription({})
             })
@@ -50,9 +47,9 @@ export const UserCard = ({ user, subscription, isSelf }) => {
                 <p className="thisIsYou">it's you!</p>
                 :
                 Object.keys(cardSubscription).length ?
-                    <button onClick={handleUnsubscribe} disabled={isLoading} className="unsubscribeButton" id={"unsubscribeButton--" + user.id}>Unsubscibe</button>
+                    <button onClick={handleUnsubscribe} disabled={isLoading} className="unsubscribeButton" id={"unsubscribeButton--" + user.user.id}>Unsubscibe</button>
                     :
-                    <button onClick={handleSubscribe} disabled={isLoading} className="subscribeButton" id={"subscribeButton--" + user.id}>Subscribe</button>
+                    <button onClick={handleSubscribe} disabled={isLoading} className="subscribeButton" id={"subscribeButton--" + user.user.id}>Subscribe</button>
             }
         </article>
     )

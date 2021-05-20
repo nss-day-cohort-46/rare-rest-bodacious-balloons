@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import serializers
-from rare_rest_api.models import Subscription
+from rare_rest_api.models import Subscription, Post, RareUser
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     """JSON serializer for subscriptions
@@ -27,5 +27,7 @@ class SubscriptionView(ViewSet):
         serializer = SubscriptionSerializer(
             subscriptions, many=True, context={'request': request})
         return Response(serializer.data)
+
+    
 
 

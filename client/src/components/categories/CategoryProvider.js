@@ -30,6 +30,7 @@ export const CategoryProvider = props => {
         return fetch(`http://localhost:8000/categories/${newCategory.id}`, {
             method: "PUT",
             headers: {
+                "Authorization": `Token ${localStorage.getItem('rare_user_token')}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(newCategory)
@@ -39,7 +40,10 @@ export const CategoryProvider = props => {
 
     const deleteCategory = id => {
         return fetch(`http://localhost:8000/categories/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem('rare_user_token')}`
+            }
         })
             .then(getCategories)
     }
