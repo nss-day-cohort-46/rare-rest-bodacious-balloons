@@ -46,7 +46,7 @@ export const PostDetail = () => {
                     reactions.map(react => {
                         const thisPostReaction = thisPostsReactions.filter(pr => react.id === pr.reactionId)
                         return <section className="reactionCounts">
-                            <img src={react.imageUrl} />
+                            <img src={react.image_url} />
                             <p>{thisPostReaction.length}</p>
                         </section>
                     })

@@ -7,7 +7,11 @@ export const ReactionProvider = props => {
     const [postReact, setPostReact] = useState([])
 
     const getReactions = () => {
-        return fetch(`http://localhost:8000/reactions`)
+        return fetch(`http://localhost:8000/reactions`,{
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
+            }
+        })
             .then(res => res.json())
             .then(setReactions)
     }
@@ -16,6 +20,7 @@ export const ReactionProvider = props => {
         return fetch("http://localhost:8000/reactions", {
             method: "POST",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(tagObj)
@@ -25,7 +30,11 @@ export const ReactionProvider = props => {
 
 
     const getPostReactions = () => {
-        return fetch(`http://localhost:8000/postReactions`)
+        return fetch(`http://localhost:8000/postReactions`,{
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
+            }
+        })
             .then(res => res.json())
             .then(setPostReact)
     }
@@ -34,6 +43,7 @@ export const ReactionProvider = props => {
         return fetch(`http://localhost:8000/postReaction`, {
             method: "POST",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(reactObj)

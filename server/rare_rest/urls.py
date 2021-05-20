@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 
+from rare_rest_api.views.reaction import ReactionView
 from rare_rest_api.views import register_user, login_user
 from django.contrib import admin
 from django.conf.urls import include
@@ -34,6 +35,7 @@ router.register(r'categories', CategoryView, 'category')
 router.register(r'comments', CommentViewSet, 'comment')
 router.register(r'users', RareUserView, 'user')
 router.register(r'subscriptions', SubscriptionView, 'subscription')
+router.register(r'reactions', ReactionView, 'reaction')
 
 urlpatterns = [
     path('', include(router.urls)),

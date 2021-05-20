@@ -6,7 +6,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from rare_rest_api.models import Post, Category, RareUser
+from rest_framework.decorators import action
+from rare_rest_api.models import Post, Category, RareUser, Reaction
 from django.contrib.auth.models import User
 
 
@@ -108,6 +109,21 @@ class PostViewSet(ViewSet):
         serializer = PostSerializer(
             post, many=True, context={'request': request})
         return Response(serializer.data)
+
+    @action(methods=['post', 'delete'], detail=True)
+        def reaction(self, request, pk=None):
+            """Manage post reactions"""
+            user = RareUser.objects.get(user=request.auth.user)
+            post = Post.objects.get(pk=pk)
+            reaction = Reaction.objects.get(pk=request.data['reactionId'])
+            if request.method == "POST":
+                react = Reaction()
+                react.user = user
+                react.post = post
+                react.reaction = reaction
+                react.save()
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
