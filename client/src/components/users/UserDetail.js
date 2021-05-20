@@ -24,6 +24,8 @@ export const UserDetail = () => {
         setCurrentSubCount(userSubs)
     }, [subscriptions])
 
+    
+    console.log(selectedUser?.admin)
     return (
         <section className="userDetail">
             <h1 className="userDetail--h1">{selectedUser.user?.username}</h1>
