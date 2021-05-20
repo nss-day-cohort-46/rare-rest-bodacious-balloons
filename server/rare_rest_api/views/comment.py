@@ -14,14 +14,14 @@ from django.db.models import Count, Q
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'username')
+        fields = ('id', 'first_name', 'last_name', 'username', 'email', 'is_staff')
 
 class RareUserSerializer(serializers.ModelSerializer):
 
     user = UserSerializer(many=False)
     class Meta:
         model = RareUser
-        fields = ('user',)
+        fields = ('user', 'created_on')
 
 class CommentSerializer(serializers.ModelSerializer):
 
