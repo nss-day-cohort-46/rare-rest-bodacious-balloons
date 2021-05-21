@@ -24,9 +24,21 @@ export const UserProvider = props => {
             .then(res => res.json())
     }
 
+    const updateAdminStatus = user => {
+        return fetch(`http://localhost:8000/users/${user.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
+          },
+          body: JSON.stringify(user)
+        })
+          .then(getAllUsers)
+      }
+
     return (
         <UserContext.Provider value={{
-            users, getAllUsers, getUserById
+            users, getAllUsers, getUserById, updateAdminStatus
         }}>
             {props.children}
         </UserContext.Provider>

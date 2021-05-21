@@ -1,11 +1,12 @@
 from rare_rest_api.models import RareUser, Subscription
-from rare_rest_api.views.comment import UserSerializer, RareUserSerializer
+from rare_rest_api.views.comment import UserSerializer
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
 from rest_framework.decorators import action
 from django.http import HttpResponseServerError
 from rest_framework.response import Response
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 
 class RareUserView(ViewSet):
@@ -55,3 +56,24 @@ class RareUserView(ViewSet):
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
+
+    def update(self, request, pk=None):
+        """Handle PUT requests for a game
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        user = User.objects.get(pk=pk)
+
+        user.is_staff=request.data['is_staff']
+        
+        user.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+    
+class RareUserSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False)
+    class Meta:
+        model = RareUser
+        fields = ('id', 'user', 'created_on')

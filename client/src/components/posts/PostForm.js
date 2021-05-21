@@ -138,7 +138,7 @@ export const PostForm = () => {
         }
     },[postId])
 
-    console.log(post)
+    
     return (
     <div>
     <form className="postForm ">
