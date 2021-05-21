@@ -7,7 +7,7 @@ import { PostCard } from './PostCard'
 import { PostContext } from './PostProvider'
 import './PostCard.css'
 
-export const PostList = props => {
+export const AdminPostList = props => {
 
     const { posts, getPosts, searchTerms } = useContext(PostContext)
     const { subscriptions, getSubscriptions } = useContext(SubscriptionContext)
@@ -18,11 +18,11 @@ export const PostList = props => {
     const userId = parseInt(localStorage.getItem(`rare_user_id`))
     const history = useHistory()
     const [filteredPosts, setFiltered] = useState([])
-    
+    const [isStaff, setIsStaff] =useState(false)
 
     //=========================to be replaced with category fetch======================//
     const { categories, getCategories } = useContext(CategoryContext)
-    const { users, getAllUsers } = useContext(UserContext)
+    const { users, getAllUsers, userNow } = useContext(UserContext)
     //=================================================================================//
 
     useEffect(() => {
@@ -106,6 +106,14 @@ export const PostList = props => {
         }
     }
     
+    useEffect(() => {
+        if(userNow.user){
+          if(userNow.user.is_staff === true){
+            setIsStaff(true)
+        }   
+        } 
+         
+    }, [userNow])
 
     return (
         <section className="posts">
@@ -149,14 +157,14 @@ export const PostList = props => {
 
 
 
-            { 
-            
+            {
+                isStaff ? 
                 subscribedPosts.map(post => <PostCard
                     key={post.id}
                     post={post}
                     category={categories.find(cat => cat.id === post.category.id)}
                     user={users.find(user => user.user.id === post.user.user.id)}
-                />)
+                />) : <></>
             }
 
         </section>

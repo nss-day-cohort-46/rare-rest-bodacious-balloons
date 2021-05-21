@@ -28,6 +28,7 @@ import { PostSearch } from "./posts/PostSearch"
 import { SubscriptionProvider } from "./subscriptions/SubscriptionProvider"
 import { ReactionProvider } from "./reactions/ReactionProvider"
 import { ReactionList } from "./reactions/ReactionList"
+import { AdminPostList } from "./posts/AdminPost"
 
 
 
@@ -60,7 +61,7 @@ export const ApplicationViews = () => {
 
                                 <Route exact path="/adminPosts">
                                     <PostSearch />
-                                    <PostList />
+                                    <AdminPostList />
                                 </Route>
 
                                 <Route exact path="/posts/create">
