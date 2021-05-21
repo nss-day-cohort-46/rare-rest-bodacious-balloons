@@ -114,8 +114,8 @@ class PostViewSet(ViewSet):
     def tags(self, request, pk=None):
         if request.method == "POST":
             post = Post.objects.get(pk=pk)
-            tags = Tag.objects.in_bulk(request.data['tags'])
-            post.tags.set(tags)
+            # tags = Tag.objects.in_bulk(request.data['tags'])
+            post.tags.set(request.data['tags'])
             post.save()
             return Response({}, status=status.HTTP_201_CREATED)
 
