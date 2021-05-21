@@ -1,11 +1,34 @@
-from rare_rest_api.models import RareUser, Subscription
-from rare_rest_api.views.comment import UserSerializer, RareUserSerializer
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.db.models import base
+from rare_rest_api.models import RareUser, Subscription, UserImage
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
 from rest_framework.decorators import action
 from django.http import HttpResponseServerError
 from rest_framework.response import Response
 from rest_framework import serializers
+from django.core.files.base import ContentFile
+import uuid, base64
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'username', 'email', 'is_staff')
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserImage
+        fields = ('image',)
+
+class RareUserSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False)
+    picture = ImageSerializer(many=True)
+    class Meta:
+        model = RareUser
+        fields = ('user', 'created_on', 'picture')
+
 
 
 class RareUserView(ViewSet):
@@ -55,3 +78,28 @@ class RareUserView(ViewSet):
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
+
+    @action(methods=['post'], detail=True)
+    def image(self, request, pk=None):
+        rare_user = RareUser.objects.get(user=request.auth.user)
+
+        try:
+            found_image = UserImage.objects.get(user=rare_user)
+            found_image.delete()
+        except:
+            pass
+        
+        user_image = UserImage()
+
+        format, imgstr = request.data["image"].split(';base64,')
+        ext = format.split('/')[-1]
+        data = ContentFile(base64.b64decode(imgstr), name=f'{rare_user.id}-{uuid.uuid4()}.{ext}')
+
+        user_image.user = rare_user
+        user_image.image = data
+        
+        try:
+            user_image.save()
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        except ValidationError as ex:
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)

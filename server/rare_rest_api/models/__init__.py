@@ -4,3 +4,4 @@ from .category import Category
 from .comment import Comment
 from .tag import Tag
 from .subscription import Subscription
+from .user_image import UserImage

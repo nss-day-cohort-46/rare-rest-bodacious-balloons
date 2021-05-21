@@ -24,9 +24,20 @@ export const UserProvider = props => {
             .then(res => res.json())
     }
 
+    const uploadUserImage = (image, userId) => {
+        return fetch(`http://localhost:8000/users/${userId}/image`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_token")}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(image)
+        })
+    }
+
     return (
         <UserContext.Provider value={{
-            users, getAllUsers, getUserById
+            users, getAllUsers, getUserById, uploadUserImage
         }}>
             {props.children}
         </UserContext.Provider>

@@ -18,6 +18,8 @@ from rare_rest_api.views import register_user, login_user
 from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from rest_framework import routers
 from rare_rest_api.views import ( CategoryView,
@@ -43,6 +45,5 @@ urlpatterns = [
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
     path('register', register_user),
     path('login', login_user),
-    
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
