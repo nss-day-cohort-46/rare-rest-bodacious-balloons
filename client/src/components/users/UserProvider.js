@@ -28,11 +28,12 @@ export const UserProvider = props => {
         return fetch(`http://localhost:8000/users/${user.id}`, {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("rare_user_token")}`
           },
           body: JSON.stringify(user)
         })
-          .then(getUserById)
+          .then(getAllUsers)
       }
 
     return (

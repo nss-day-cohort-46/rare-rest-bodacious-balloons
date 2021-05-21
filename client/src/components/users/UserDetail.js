@@ -13,7 +13,7 @@ export const UserDetail = () => {
     const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
     const isCurrentUser = currentUserId === parseInt(userId)
     const [currentSubCount, setCurrentSubCount] = useState(0)
-    const [admin, setAdmin] = useState({})
+    const [admin, setAdmin] = useState(false)
 
     useEffect(() => {
         getSubscriptions()
@@ -27,24 +27,51 @@ export const UserDetail = () => {
     }, [subscriptions])
 
     // debugger
-    const currentUser= users.find(user => user.user.id === parseInt(currentUserId))
-
+    let adminArray = []
+    const adminUsers = users.map(staff =>{ if(staff.user.is_staff === true){adminArray.push(staff.user.is_staff)}})
+    
+    const currentUser= users.find(user => user.id === parseInt(currentUserId))
+    console.log(adminArray)
     const handleAdmin = (event) => {
         if(event.target.checked){
             const admin = {
-                id: selectedUser.user.id,
+                id: selectedUser.id,
                 is_staff: true
             }
-            setAdmin(admin)
+            updateAdminStatus(admin)
         }
         if(event.target.checked === false){
             const admin = {
-                id: selectedUser.user.id,
+                id: selectedUser.id,
                 is_staff: false
             }
-            setAdmin(admin)
+            updateAdminStatus(admin)
             return event.target.checked ? event.target.unchecked : event.target.checked
         }
+        
+    }
+    const handleRemoveAdmin = (event) => {
+        if(adminArray.length > 1){
+        if(event.target.checked){
+            const admin = {
+                id: selectedUser.id,
+                is_staff: false
+            }
+            updateAdminStatus(admin)
+        }
+        if(event.target.checked === false){
+            const admin = {
+                id: selectedUser.id,
+                is_staff: true
+            }
+            updateAdminStatus(admin)
+            return event.target.checked ? event.target.unchecked : event.target.checked
+        }
+    }else {
+        window.alert("Must have at least one approved admin user")
+        setAdmin(event.target.checked)
+    }
+        
         
     }
     
@@ -65,9 +92,9 @@ export const UserDetail = () => {
                 </div>
             </div>
             <div>{currentUser?.user.is_staff ? selectedUser.user?.is_staff ? <div></div>:
-            <div><label htmlFor="admin">Admin Approve: </label><input type="checkbox" id="admin" onChange={handleAdmin}/></div> : 
+            <div><label htmlFor="admin">Approve user as admin: </label><input type="checkbox" id="admin" onChange={handleAdmin}/></div> : 
             <div></div>}</div>
-            <div>{currentUser?.user.is_staff ? selectedUser.user?.is_staff ?<div><label htmlFor="admin">Admin: </label><input type="checkbox" id="admin" checked onChange={handleAdmin}/></div> :
+            <div>{currentUser ? selectedUser.user?.is_staff ?<div><label htmlFor="admin">Unauthorize user as admin: </label><input type="checkbox" id="admin" onChange={handleRemoveAdmin}/></div> :
              <div></div>: 
             <div></div>}</div>
             <p className="userDetail--userType">{selectedUser.user?.is_staff ? "admin" : "regular user"}</p>
