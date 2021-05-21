@@ -4,13 +4,16 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { UserProvider } from "./users/UserProvider"
 
 export const Rare = (props) => (
     <>
         <Route render={() => {
             if (localStorage.getItem("rare_user_token")) {
                 return <>
+                <UserProvider>
                     <NavBar />
+                </UserProvider>
                     <ApplicationViews />
                 </>
             } else {

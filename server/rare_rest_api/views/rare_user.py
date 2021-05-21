@@ -65,7 +65,7 @@ class RareUserView(ViewSet):
         user = User.objects.get(pk=pk)
 
         user.is_staff=request.data['is_staff']
-        
+
         user.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)

@@ -1,11 +1,44 @@
-import React from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import "./NavBar.css"
 import Logo from "./rare.jpeg"
+import { UserContext } from '../users/UserProvider'
 
 export const NavBar = () => {
     const history = useHistory()
+    const { getAllUsers, users } = useContext(UserContext)
+    const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
+    const [isStaff, setIsStaff] =useState(false)
+    const [userNow, setUserNow] = useState({})
 
+    useEffect(() => {
+        getAllUsers() 
+    }, [])
+    
+    useEffect(() => {
+        if(users.length){
+            const currentUser= users.find(user => user.id === parseInt(currentUserId))
+          setUserNow(currentUser)
+        }    
+    }, [users])
+    
+    useEffect(() => {
+        if(userNow.user){
+          if(userNow.user.is_staff === true){
+            setIsStaff(true)
+        }   
+        } 
+         
+    }, [userNow])
+
+
+    
+      
+    //     // const isUser = userNow.user
+        
+             
+    // console.log(currentUser)
+    
     return (
         <ul className="navbar">
             {/* <li className="navbar__item">
@@ -23,9 +56,10 @@ export const NavBar = () => {
             <li className="navbar__item link">
                 <Link className="navbar__link" to="/myposts">My Posts</Link>
             </li>
-            <li className="navbar__item link">
+            {isStaff ? <li className="navbar__item link">
                 <Link className="navbar__link" to="/tags">Tag Management</Link>
-            </li>
+            </li> : <></>}
+            
             <li className="navbar__item link">
                 <Link className="navbar__link" to="/categories">Categories</Link>
             </li>
