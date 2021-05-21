@@ -1,9 +1,18 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const UserContext = createContext();
 
 export const UserProvider = props => {
     const [users, setUsers] = useState([])
+    const [userNow, setUserNow] = useState({})
+    const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
+
+    useEffect(() => {
+        if(users.length){
+            const currentUser= users.find(user => user.id === parseInt(currentUserId))
+          setUserNow(currentUser)
+        }    
+    }, [users])
 
     const getAllUsers = () => {
         return fetch(`http://localhost:8000/users`, {
@@ -38,7 +47,7 @@ export const UserProvider = props => {
 
     return (
         <UserContext.Provider value={{
-            users, getAllUsers, getUserById, updateAdminStatus
+            users, getAllUsers, getUserById, updateAdminStatus, userNow
         }}>
             {props.children}
         </UserContext.Provider>

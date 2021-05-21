@@ -6,21 +6,14 @@ import { UserContext } from '../users/UserProvider'
 
 export const NavBar = () => {
     const history = useHistory()
-    const { getAllUsers, users } = useContext(UserContext)
-    const currentUserId = parseInt(localStorage.getItem('rare_user_id'))
+    const { getAllUsers, users, userNow } = useContext(UserContext)
     const [isStaff, setIsStaff] =useState(false)
-    const [userNow, setUserNow] = useState({})
+   
 
     useEffect(() => {
         getAllUsers() 
     }, [])
-    
-    useEffect(() => {
-        if(users.length){
-            const currentUser= users.find(user => user.id === parseInt(currentUserId))
-          setUserNow(currentUser)
-        }    
-    }, [users])
+
     
     useEffect(() => {
         if(userNow.user){
@@ -31,13 +24,6 @@ export const NavBar = () => {
          
     }, [userNow])
 
-
-    
-      
-    //     // const isUser = userNow.user
-        
-             
-    // console.log(currentUser)
     
     return (
         <ul className="navbar">
@@ -56,6 +42,9 @@ export const NavBar = () => {
             <li className="navbar__item link">
                 <Link className="navbar__link" to="/myposts">My Posts</Link>
             </li>
+            {isStaff ? <li className="navbar__item link">
+                <Link className="navbar__link" to="/adminPosts">Admin Posts</Link>
+            </li>: <></>}
             {isStaff ? <li className="navbar__item link">
                 <Link className="navbar__link" to="/tags">Tag Management</Link>
             </li> : <></>}
