@@ -20,12 +20,9 @@ export const ReactionList =() => {
         reactionId: 0
     })
 
-    const handleReactionClick = (event) => {
+    const handleReactionClick = (event, reactionId) => {
         event.preventDefault()
-        // const newReaction = {...reaction}
-        console.log(event)
-        const reactionId = parseInt(event.target.value)
-        console.log(reactionId)
+      
         addPostReaction({reactionId: reactionId}, parseInt(postId))     
       }
     
@@ -35,7 +32,7 @@ export const ReactionList =() => {
         <>
             <h2>Reactions</h2>
             {console.log(reactions)}
-            <div>{reactions.map(react => <button onClick={handleReactionClick} id="reactionId" value={react.id} key={react.id}><img key={react.id} value={react.id} src={react?.image_url} width="10%"/></button>)}</div>
+            <div>{reactions.map(react => <button onClick={(event)=> handleReactionClick(event, react.id)} id="reactionId" value={react.id} key={react.id}><img key={react.id} src={react?.image_url} width="10%"/></button>)}</div>
         </>
     )
 }
