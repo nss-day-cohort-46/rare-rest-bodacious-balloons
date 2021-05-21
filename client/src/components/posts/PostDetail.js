@@ -26,8 +26,8 @@ export const PostDetail = () => {
     }, [postId])
 
     useEffect(() => {
-        setThisPostsReactions(postReact.filter(pR => pR.postId === parseInt(postId)))
-    }, [postReact])
+        setThisPostsReactions(postDetail.reactions)
+    }, [postReact, postDetail])
 
 
     return (
@@ -42,9 +42,10 @@ export const PostDetail = () => {
             </article>
 
             <div className="reactionCounts">
-                {
+                { thisPostsReactions&&
                     reactions.map(react => {
-                        const thisPostReaction = thisPostsReactions.filter(pr => react.id === pr.reactionId)
+                        // debugger
+                        const thisPostReaction = thisPostsReactions.filter(pr => react.id === pr.id)
                         return <section className="reactionCounts">
                             <img src={react.image_url} />
                             <p>{thisPostReaction.length}</p>
