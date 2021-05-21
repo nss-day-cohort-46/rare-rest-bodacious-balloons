@@ -49,7 +49,7 @@ export const UserDetail = () => {
         <section className="userDetail">
             <h1 className="userDetail--h1">{selectedUser.user?.username}</h1>
             <div className="userDetail__details">
-                <img className="avatar" src={selectedUser.picture ? selectedUser.picture[0]?.image : emptyAvatar}></img>
+                {selectedUser.picture && <img className="avatar" src={selectedUser.picture.length ? selectedUser.picture[0].image : emptyAvatar}></img>}
                 <div className="userDetail__details--right">
                     <p>{selectedUser.user?.first_name} {selectedUser.user?.last_name}</p>
                     <p>{selectedUser.user?.email}</p>
