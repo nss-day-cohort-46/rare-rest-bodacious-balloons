@@ -1,0 +1,42 @@
+[
+    {
+        "model": "rare_rest_api.reaction",
+        "pk": 1,
+        "fields": {
+            "label" : "like",
+            "image_url": "https://cdn4.iconfinder.com/data/icons/multimedia-75/512/multimedia-10-128.png"
+        }
+    },
+    {
+        "model": "rare_rest_api.reaction",
+        "pk": 2,
+        "fields": {
+            "label" : "love",
+            "image_url": "https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/heart-love-like-likes-loved-favorite-128.png"
+        }
+    },
+    {
+        "model": "rare_rest_api.reaction",
+        "pk": 3,
+        "fields": {
+            "label" : "dislike",
+            "image_url": "https://cdn4.iconfinder.com/data/icons/multimedia-75/512/multimedia-20-128.png"
+        }
+    },
+    {
+        "model": "rare_rest_api.reaction",
+        "pk": 4,
+        "fields": {
+            "label" : "wow",
+            "image_url": "https://cdn3.iconfinder.com/data/icons/emoticon-back-white/16/emotion_b_w_Strange-128.png"
+        }
+    },
+    {
+        "model": "rare_rest_api.reaction",
+        "pk": 5,
+        "fields": {
+            "label" : "approve",
+            "image_url": "https://cdn1.iconfinder.com/data/icons/feather-2/24/check-128.png"
+        }
+    }
+]

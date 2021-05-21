@@ -6,7 +6,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from rare_rest_api.models import Post, Category, RareUser, Tag
+from rest_framework.decorators import action
+from rare_rest_api.models import Post, Category, RareUser, Reaction, Tag
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
 
@@ -111,6 +112,21 @@ class PostViewSet(ViewSet):
         return Response(serializer.data)
 
     @action(methods=['post'], detail=True)
+    def reaction(self, request, pk=None):
+        """Manage post reactions"""
+        # user = RareUser.objects.get(user=request.auth.user)
+        post = Post.objects.get(pk=pk)
+        reaction = Reaction.objects.get(pk=request.data['reactionId'])
+        if request.method == "POST":
+           
+            post.reactions.add(reaction)
+            
+            return Response({}, status=status.HTTP_201_CREATED)
+
+        return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+    @action(methods=['post'], detail=True)
     def tags(self, request, pk=None):
         if request.method == "POST":
             post = Post.objects.get(pk=pk)
@@ -143,5 +159,5 @@ class PostSerializer(serializers.ModelSerializer):
     user = RareUserSerializer(many=False)
     class Meta:
         model = Post
-        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'category', 'user', 'approved', 'tags')
+        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'category', 'user', 'approved', 'tags', 'reactions')
         depth = 1

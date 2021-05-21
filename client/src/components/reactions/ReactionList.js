@@ -11,7 +11,7 @@ export const ReactionList =() => {
 
     useEffect(()=>{
         getReactions()
-        .then(()=> getPostReactions())
+        // .then(()=> getPostReactions(postId))
     }, [])
 
     const [reaction, setReaction]= useState({
@@ -20,11 +20,10 @@ export const ReactionList =() => {
         reactionId: 0
     })
 
-    const handleReactionClick = (event) => {
-        const newReaction = {...reaction}
-        newReaction[event.target.id] = parseInt(event.target.value)
-        // setReaction(newReaction)
-        addPostReaction(newReaction)     
+    const handleReactionClick = (event, reactionId) => {
+        event.preventDefault()
+      
+        addPostReaction({reactionId: reactionId}, parseInt(postId))     
       }
     
 
@@ -32,7 +31,8 @@ export const ReactionList =() => {
     return(
         <>
             <h2>Reactions</h2>
-            <div>{reactions.map(react => <button onClick={handleReactionClick} id="reactionId" value={react.id} key={react.id}><img key={react.id} src={react?.imageUrl} width="10%"/></button>)}</div>
+            {console.log(reactions)}
+            <div>{reactions.map(react => <button onClick={(event)=> handleReactionClick(event, react.id)} id="reactionId" value={react.id} key={react.id}><img key={react.id} src={react?.image_url} width="10%"/></button>)}</div>
         </>
     )
 }
