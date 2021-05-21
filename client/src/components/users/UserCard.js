@@ -38,7 +38,7 @@ export const UserCard = ({ user, subscription, isSelf }) => {
 
     return (
         <article className="userCard">
-            <h2 className="userNameLink" onClick={() => history.push(`/users/${user.id}`)}>{user.user.username}</h2>
+            <h2 className="userNameLink" onClick={() => history.push(`/users/${user.user.id}`)}>{user.user.username}</h2>
             <h3>{user.user.first_name} {user.user.last_name}</h3>
             <p>Everyone is an admin!</p>
             {/* ternary - if the user card belongs to the current user, return "this is you", if not, show buttons */}
