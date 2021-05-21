@@ -151,12 +151,14 @@ export const PostList = props => {
 
             { 
             
-                subscribedPosts.map(post => <PostCard
+                subscribedPosts.map(post => 
+                post.approved ? <PostCard
                     key={post.id}
                     post={post}
                     category={categories.find(cat => cat.id === post.category.id)}
                     user={users.find(user => user.user.id === post.user.user.id)}
-                />)
+                /> : <></>
+            )
             }
 
         </section>

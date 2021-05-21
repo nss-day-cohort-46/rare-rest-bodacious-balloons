@@ -8,7 +8,7 @@ import { ReactionContext } from '../reactions/ReactionProvider';
 import './PostDetail.css'
 
 export const PostDetail = () => {
-    const { getPostById } = useContext(PostContext)
+    const { getPostById, updatePost } = useContext(PostContext)
     const { reactions, getReactions, postReact, getPostReactions } = useContext(ReactionContext)
     const [thisPostsReactions, setThisPostsReactions] = useState([])
     const [postDetail, setPostDetail] = useState({})
@@ -29,9 +29,53 @@ export const PostDetail = () => {
         setThisPostsReactions(postReact.filter(pR => pR.postId === parseInt(postId)))
     }, [postReact])
 
+    const [post, setPost] = useState({
+        
+    })
+
+    const handleCheckChange = (event) => {
+        // event.preventDefault()
+
+        event.target.checked ?
+        updatePost({
+            id : parseInt(postId),
+            user: postDetail.user.id,
+            title: postDetail.title,
+            content: postDetail.content,
+            image_url: postDetail.image_url,
+            category_id: postDetail.category.id,
+            publication_date: postDetail.publication_date,
+            approved: true
+        }) : updatePost({
+            id : parseInt(postId),
+            user: postDetail.user.id,
+            title: postDetail.title,
+            content: postDetail.content,
+            image_url: postDetail.image_url,
+            category_id: postDetail.category.id,
+            publication_date: postDetail.publication_date,
+            approved: false})
+    }
+
 
     return (
         <>
+            
+            <fieldset>
+            {postDetail.approved ? <></> :
+            <div className="form-group">
+            
+            <label htmlFor="approved">Approve this post: </label>
+
+            <input 
+                checked={post.approved}
+                onChange={handleCheckChange}
+                id="approved"
+                type="checkbox"
+            />
+            
+            </div>}
+            </fieldset>
             <article className="post_detail">
                 <h1 className="title">{postDetail.title}</h1>
                 <Link to={`/posts/detail/edit/${postDetail.id}`}>EDIT</Link>

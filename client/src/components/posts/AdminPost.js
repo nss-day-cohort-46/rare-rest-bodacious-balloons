@@ -18,11 +18,10 @@ export const AdminPostList = props => {
     const userId = parseInt(localStorage.getItem(`rare_user_id`))
     const history = useHistory()
     const [filteredPosts, setFiltered] = useState([])
-    const [isStaff, setIsStaff] =useState(false)
 
     //=========================to be replaced with category fetch======================//
     const { categories, getCategories } = useContext(CategoryContext)
-    const { users, getAllUsers, userNow } = useContext(UserContext)
+    const { users, getAllUsers} = useContext(UserContext)
     //=================================================================================//
 
     useEffect(() => {
@@ -106,18 +105,10 @@ export const AdminPostList = props => {
         }
     }
     
-    useEffect(() => {
-        if(userNow.user){
-          if(userNow.user.is_staff === true){
-            setIsStaff(true)
-        }   
-        } 
-         
-    }, [userNow])
 
     return (
         <section className="posts">
-            <h2>{history.location.pathname.includes("/my") ? "My Posts" : "My Feed"}</h2>
+            <h2>{history.location.pathname.includes("/admin") ? "Post Approval List" : "My Feed"}</h2>
 
             {!history.location.pathname.includes("/my") && <section>
                 <fieldset>
@@ -158,13 +149,14 @@ export const AdminPostList = props => {
 
 
             {
-                isStaff ? 
-                subscribedPosts.map(post => <PostCard
+                subscribedPosts.map(post => 
+                post.approved ? <></> :
+                <PostCard
                     key={post.id}
                     post={post}
                     category={categories.find(cat => cat.id === post.category.id)}
                     user={users.find(user => user.user.id === post.user.user.id)}
-                />) : <></>
+                />) 
             }
 
         </section>

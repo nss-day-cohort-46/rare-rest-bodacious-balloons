@@ -26,19 +26,7 @@ export const PostForm = () => {
     const { postId } = useParams();
     const history = useHistory();
 
-    const handleCheckChange = (event) => {
-        // event.preventDefault()
-
-        const newPost = { ...post }
-
-        if (post.approved===true) {
-        newPost[event.target.id] = false
-        }else{
-        newPost[event.target.id] = true
-        }
-
-        setPost(newPost)
-    }
+    
 
     //update state on every field change
     const handleControlledInputChange = (event) => {
@@ -191,20 +179,7 @@ export const PostForm = () => {
             </div>
         </fieldset>
 
-        <fieldset>
-        <div className="form-group">
         
-        <label htmlFor="approved">Approved:&nbsp;</label>
-
-        <input 
-            checked={post.approved}
-            onChange={handleCheckChange}
-            id="approved"
-            type="checkbox"
-        />
-        
-        </div>
-        </fieldset>
 
         <button className=""
         type="submit"
